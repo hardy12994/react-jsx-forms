@@ -1,0 +1,31 @@
+{
+  "name": "react-jsx-forms",
+  "version": "0.0.0",
+  "description": "Forms Helper To REACT forms with multiple controls in it.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hardy12994/react-jsx-forms.git"
+  },
+  "keywords": [
+    "react-jsx-forms",
+    "react-js-forms",
+    "react-forms",
+    "reactive-forms",
+    "react-validation"
+  ],
+  "author": "hardeepsingh12994@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hardy12994/react-jsx-forms/issues"
+  },
+  "homepage": "https://github.com/hardy12994/react-jsx-forms#readme",
+  "dependencies": {
+    "react": "^16.3.2",
+    "rxjs": "^6.1.0",
+    "underscore": "^1.9.0"
+  }
+}
