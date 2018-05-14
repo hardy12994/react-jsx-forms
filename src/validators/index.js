@@ -9,6 +9,8 @@ export const Validators = {
     required: StaticValidators.required,
     pattern: StaticValidators.pattern,
     matchLength: StaticValidators.matchLength,
+    matchStringText: StaticValidators.matchStringText,
+    matchNumText: StaticValidators.matchNumText,
 
 
     //dynaic
