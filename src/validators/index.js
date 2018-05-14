@@ -3,6 +3,7 @@ import { DyanamicValidators } from './dynamicValidators';
 
 
 export const Validators = {
+
     //static
     minChar: StaticValidators.minChar,
     maxChar: StaticValidators.maxChar,
@@ -12,8 +13,7 @@ export const Validators = {
     matchStringText: StaticValidators.matchStringText,
     matchNumText: StaticValidators.matchNumText,
 
-
-    //dynaic
+    //dynamic
     compose: DyanamicValidators.compose
 
 };
