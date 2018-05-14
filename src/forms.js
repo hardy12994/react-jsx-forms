@@ -22,12 +22,14 @@ export class Forms extends Component {
 
     constructor(props) {
         super(props);
-        this.whenFormUpdate = new Subject();
-        this.reactInputs = this.filterInputFields(this.props.children);
     }
 
     componentDidMount() {
+        
+        //wrapping all events
         this.wrapEvents();
+
+        // passing the statefull forms fields
         this.constructFormFields(this.props.fields);
     }
 
@@ -52,10 +54,6 @@ export class Forms extends Component {
         this.executeFromMechanism();
     }
 
-
-    filterInputFields(children = []) {
-        return _.filter(children, item => item.type === 'input');
-    }
 
 
     // Execute Validations
@@ -169,13 +167,13 @@ export class Forms extends Component {
     wrapEvents() {
 
         let that = this;
-        _.each(this.reactInputs, inp => {
+        for (const field in this.props.fields) {
 
-            var input = document.querySelector(`#${inp.props.id}`);
+            var input = document.querySelector(`#${field}`);
 
             let focusEvent = fromEvent(input, 'blur')
                 .subscribe(event => {
-                    let inputId = inp.props.id;
+                    let inputId = field;
 
                     form.fields[inputId].touched = true;
                     that.executeFieldMechanism(inputId, event);
@@ -187,7 +185,7 @@ export class Forms extends Component {
 
             let keyDownEvent = fromEvent(input, 'keydown')
                 .subscribe(event => {
-                    let inputId = inp.props.id;
+                    let inputId = field;
 
                     form.fields[inputId].dirty = true;
 
@@ -198,7 +196,7 @@ export class Forms extends Component {
             fromEvent(input, 'keyup')
                 .subscribe(event => {
 
-                    let inputId = inp.props.id;
+                    let inputId = field;
 
                     form.fields[inputId].value = event.target.value;
                     form.value[inputId] = event.target.value;
@@ -206,8 +204,7 @@ export class Forms extends Component {
                     that.executeFieldMechanism(inputId, event);
 
                 });
-
-        });
+        }
 
     }
 
