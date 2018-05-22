@@ -1,63 +1,48 @@
 import React, { Component } from 'react';
 import _ from 'underscore';
 import { fromEvent, Subject } from 'rxjs';
-import { FieldProperties } from './field-properties';
 
 
-let form = {
+export const formSchema = {
+    id: '',
     fields: {},
     valid: true,
     value: {},
+    // errors: {}, // TODO
+    // validations: {}, //TODO
     valueChanges: new Subject()
 };
 
+export const forms = {}; // collection of formSchema
 
+
+//  for Events trigger
 export class Forms extends Component {
 
     // GET FORM DATA  
-    static retriveForm(fieldId = null) {
-        return fieldId ? form.fields[fieldId] : form;
+    static retriveForm(formId) {
+        return formId ? forms[formId] : forms;
     }
-
 
     constructor(props) {
         super(props);
+        if (!this.props.id) {
+            throw new Error('form id is required');
+        }
     }
 
     componentDidMount() {
-        
         //wrapping all events
         this.wrapEvents();
-
-        // passing the statefull forms fields
-        this.constructFormFields(this.props.fields);
     }
 
 
-    // contricting fields with default values in form
-    constructFormFields(fields) {
-
-        for (const key in fields) {
-
-            let field = new FieldProperties(key, fields[key].value, fields[key].validations,
-                fields[key].error, false, false, fields[key].valid);
-
-            form.fields[key] = field;
-        }
-        this.triggreDefaultForm();
-    }
-
-
-
-    // geting default form at first
-    triggreDefaultForm() {
-        this.executeFromMechanism();
-    }
-
-
+    /***************** 
+     ***** FIELD ******
+    *******************/
 
     // Execute Validations
-    executeValidations(fieldData, event) {
+    updateFieldValidations(fieldData, event) {
 
         if (fieldData.validations.length === 0) {
             fieldData.error = null;
@@ -81,8 +66,13 @@ export class Forms extends Component {
         });
     }
 
+
+    /***************** 
+    ***** FIELD ******
+   *******************/
+
     // Field VALID / INVALID
-    checkFieldValidity(fieldData) {
+    updateFieldValidity(fieldData) {
 
         if (_.isEmpty(fieldData.error)) {
             fieldData.valid = true;
@@ -92,7 +82,7 @@ export class Forms extends Component {
         for (const key in fieldData.error) {
             if (fieldData.error[key]) {
                 fieldData.valid = false;
-                form.valid = false;
+                formSchema.valid = false;
                 return;
             }
         }
@@ -100,58 +90,47 @@ export class Forms extends Component {
         return;
     }
 
-    // Form VALID / INVALID
-    checkFormValidity() {
 
-        for (const key in form.fields) {
-            if (!form.fields[key].valid) {
-                form.valid = false;
-                return;
-            }
-        }
-        form.valid = true;
-    }
+    /***************** 
+    ***** FIELD ******
+    *******************/
 
     // Exectute for perticular field
-    executeFieldMechanism(inputId, event) {
+    updateField(inputId, event) {
 
-        form.value[inputId] = event.target.value;
+        let formData = forms[this.props.id];
 
         // run validators
         // set Errors Errors
-        this.executeValidations(form.fields[inputId], event);
-
+        this.updateFieldValidations(formData.fields[inputId], event);
         // set valid or not
-        this.checkFieldValidity(form.fields[inputId]);
+        this.updateFieldValidity(formData.fields[inputId]);
 
-        this.checkFormValidity();
-        form.valueChanges.next(form);
-        form.fields[inputId].valueChanges.next(form.fields[inputId]);
+        this.updateFormValidity();
+
+        formData.valueChanges.next(forms);
+        formData.fields[inputId].valueChanges.next(formData.fields[inputId]);
     }
 
-    // Exectute for FORM
-    executeFromMechanism() {
-
-        for (const key in form.fields) {
 
 
-            form.value[key] = form.fields[key].value;
-            // run validators
-            // set Errors Errors
-            this.executeValidations(form.fields[key], {
-                target: {
-                    value: form.fields[key].value
-                }
-            });
+    /***************** 
+    ***** FORM *******
+    *******************/
 
-            // set valid or not
-            this.checkFieldValidity(form.fields[key]);
+    // Form VALID / INVALID
+    updateFormValidity() {
 
+        let formFields = forms[this.props.id].fields;
+
+        for (const key in formFields) {
+            if (!formFields[key].valid) {
+                forms[this.props.id].valid = false;
+                return;
+            }
         }
-        this.checkFormValidity();
-        form.valueChanges.next(form);
+        forms[this.props.id].valid = true;
     }
-
 
 
     // for deactivation    
@@ -167,41 +146,63 @@ export class Forms extends Component {
     wrapEvents() {
 
         let that = this;
-        for (const field in this.props.fields) {
+        for (const field in forms[this.props.id].fields) {
 
             var input = document.querySelector(`#${field}`);
 
             let focusEvent = fromEvent(input, 'blur')
                 .subscribe(event => {
-                    let inputId = field;
 
-                    form.fields[inputId].touched = true;
-                    that.executeFieldMechanism(inputId, event);
+                    let inputId = field;
+                    let isFocused = forms[this.props.id].fields[inputId].eventsTrigger.focusEvent;
+
+
+                    if (isFocused) {
+                        return that.deactivateFocusEvent(focusEvent);
+                    }
+                    // console.log('FOCUS');
+
+
+                    forms[this.props.id].fields[inputId].touched = true;
+                    that.updateField(inputId, event);
 
                     // unsubscribe it
                     that.deactivateFocusEvent(focusEvent);
-
+                    forms[this.props.id].fields[inputId].eventsTrigger.focusEvent = true;
                 });
 
             let keyDownEvent = fromEvent(input, 'keydown')
                 .subscribe(event => {
-                    let inputId = field;
 
-                    form.fields[inputId].dirty = true;
+                    let inputId = field;
+                    let isKeyDown = forms[this.props.id].fields[inputId].eventsTrigger.keyDownEvent;
+
+                    if (isKeyDown) {
+                        return that.deactivateKeyDownEvent(keyDownEvent);
+                    }
+
+                    // console.log('KEYDOWN');
+
+                    forms[this.props.id].fields[inputId].dirty = true;
 
                     // unsubscribe it
                     that.deactivateKeyDownEvent(keyDownEvent);
+                    forms[this.props.id].fields[inputId].eventsTrigger.keyDownEvent = true;
+
                 });
 
-            fromEvent(input, 'keyup')
+            let keyEvent = fromEvent(input, 'keyup')
                 .subscribe(event => {
+                    // console.log('KEYUP');
 
                     let inputId = field;
 
-                    form.fields[inputId].value = event.target.value;
-                    form.value[inputId] = event.target.value;
+                    forms[that.props.id].fields[inputId].dirty = true;
+                    forms[that.props.id].fields[inputId].value = event.target.value;
+                    forms[that.props.id].value[inputId] = event.target.value;
 
-                    that.executeFieldMechanism(inputId, event);
+                    that.updateField(inputId, event);
+                    forms[this.props.id].fields[inputId].eventsTrigger.keyUpEvent = true;
 
                 });
         }
