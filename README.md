@@ -206,7 +206,7 @@ let notI = {
 
 - **setValue(value, emitValue = false)**
        
-       value = "value", value will be any String, emitEvent = false, Boolean, Default is false, To Emit (field valueChanges)        set emitEvent to true.
+       value = "value", value will be any String, emitEvent = false, Boolean, Default is false, To Emit (field valueChanges) set emitEvent to true.
 
 - **getValue()**
 
@@ -218,11 +218,11 @@ let notI = {
 
 - **hasError(errorCode = null)**
 
-       Argument errorCode="required" || null, returns Boolean ,check if this `required` key is present and is true in Erorrs        or if errorCode is null then it will tell true error validations are present in field or Not.
+       Argument errorCode="required" || null, returns Boolean ,check if this `required` key is present and is true in Erorrs or if errorCode is null then it will tell true error validations are present in field or Not.
 
 - **makeDirty(isDirty = true)**
 
-       Argument isDirty = true, makes the field dirty mannual, Default true, it can also make undirty by passing false in          it.
+       Argument isDirty = true, makes the field dirty mannual, Default true, it can also make undirty by passing false in it.
 
 - **makeTouched(isTouched = true)**
 
