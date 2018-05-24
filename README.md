@@ -226,7 +226,7 @@ let notI = {
 
 - **makeTouched(isTouched = true)**
 
-        Argument isTouched = true, makes the field Touched mannual, Default true, it can also make unTouched by passing             false in it.
+        Argument isTouched = true, makes the field Touched mannual, Default true, it can also make unTouched by passing false in it.
 
 - **getFieldData()**
 
