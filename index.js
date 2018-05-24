@@ -1,3 +1,4 @@
 
-export * from './src/forms';
-export * from './src/validators';
+export * from '..src/forms';
+export * from '..src/form-builder';
+export * from '..src/validators';

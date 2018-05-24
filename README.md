@@ -1,4 +1,4 @@
-This Module helps you to deal with the Forms in **ReactJS**. It gives you very flexible form which will update you state of your Form every time you intract with it and this will save three main actions **( Touched, Dirty, Valid )** of every field form that you can get help in Validation area.
+This Module helps you to deal with the Forms in **ReactJS**. It gives you very flexible form which will update you state of your Form every time you interact with it and this will save three main actions **( Touched, Dirty, Valid )** of every field form that you can get help in Validation area.
 
 **This module will look familiar to those who had done *Angular* (A) Forms.**
 
@@ -30,6 +30,8 @@ export class LoginComponent extends Component {
             loginForm: { ...this.loginForm }
         };
 
+        // Discribe Below        
+        this.handelChangeEvent = this.handelChangeEvent.bind(this);
        }
 
        formInit() {
@@ -67,6 +69,11 @@ export class LoginComponent extends Component {
         this.loginForm = new FormBuilder('loginForm', fields);
     }
 
+        componentDidMount() {
+        // Discribe Below     
+        this.activateSubscribers();
+    } 
+
        render(){
 
            // you can see here your form is more than your defined.
@@ -74,7 +81,10 @@ export class LoginComponent extends Component {
            console.log(this.state.loginForm);
 
            return (
-               <MyForm formFields = {this.state.loginForm.fields} />
+               <MyForm 
+                    formFields = {this.state.loginForm.fields} 
+                    onChange = { this.handelChangeEvent }
+                    />
            );
        }
 }
