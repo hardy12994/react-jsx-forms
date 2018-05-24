@@ -20,10 +20,11 @@ export class FieldProperties {
         this.eventsTrigger = {
             focusEvent: false,
             keyDownEvent: false,
-            keyUpEvent: false
+            // keyUpEvent: false,
+            clickEvent: false
         };
 
-        this.setErrorsForNoInputValidations();
+        // this.setErrorsForNoInputValidations();
     }
 
     /** 
@@ -162,8 +163,9 @@ export class FieldProperties {
     *******************/
 
     /** 
-    * @argument properties={ onlySelf:boolean,emitEvent:boolean }
+    * @argument properties= { onlySelf : boolean , emitEvent : boolean }
     * 
+    * @description
     * Default - onlySelf = false ,emitEvent = false
     * 1. Update value in one step up in form (value),
     * 2. Validate when value is update.
@@ -174,21 +176,6 @@ export class FieldProperties {
     */
 
     updateValueAndValidity(properties) {
-
-        /** 
-         * properties={
-         *    
-         *    onlySelf:boolean,
-         *    emitEvent:boolean   
-         *  
-         *    }
-        */
-
-        // update value in one step of form
-        // validate when value is update
-
-        // FormBuilder.executeFromMechanism(this.formId);
-
 
         let formData = forms[this.formId];
 
@@ -201,6 +188,8 @@ export class FieldProperties {
         });
 
         FormBuilder.updateFieldValidity(formFields[this.id]);
+
+        FormBuilder.updateFormValidity(this.formId);
 
         if (_.isEmpty(properties)) return;
 
@@ -217,17 +206,17 @@ export class FieldProperties {
         }
     }
 
-    setErrorsForNoInputValidations() {
+    // setErrorsForNoInputValidations() {
 
-        this.validations.forEach(validation => {
+    //     this.validations.forEach(validation => {
 
-            if (validation.name === 'required') {
-                this.error = {
-                    required: true
-                };
-            }
-            return;
-        });
-    }
+    //         if (validation.name === 'required') {
+    //             this.error = {
+    //                 required: true
+    //             };
+    //         }
+    //         return;
+    //     });
+    // }
 
 }

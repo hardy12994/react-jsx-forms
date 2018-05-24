@@ -79,7 +79,7 @@ export class FormBuilder {
     static updateFieldValidations(fieldData, event) {
 
         if (fieldData.validations.length === 0) {
-            fieldData.error = null;
+            fieldData.error = {};
             return;
         }
         if (!fieldData.error) {

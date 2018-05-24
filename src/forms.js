@@ -19,7 +19,7 @@ export const forms = {}; // collection of formSchema
 //  for Events trigger
 export class Forms extends Component {
 
-    // GET FORM DATA  
+    // GET FORM DATA
     static retriveForm(formId) {
         return formId ? forms[formId] : forms;
     }
@@ -132,88 +132,127 @@ export class Forms extends Component {
         forms[this.props.id].valid = true;
     }
 
+    executeEvents(input, field) {
+        let that = this;
 
-    // for deactivation    
-    deactivateKeyDownEvent(observable) {
-        observable.unsubscribe();
+        let focusEvent = fromEvent(input, 'blur')
+            .subscribe(event => {
+                // console.log('BLUR');
+
+                let inputId = field;
+                let isFocused = forms[this.props.id].fields[inputId].eventsTrigger.focusEvent;
+
+                if (isFocused) {
+                    return that.deactivateEvent(focusEvent);
+                }
+
+                forms[this.props.id].fields[inputId].touched = true;
+                that.updateField(inputId, event);
+
+                // unsubscribe it
+                that.deactivateEvent(focusEvent);
+                forms[this.props.id].fields[inputId].eventsTrigger.focusEvent = true;
+            });
+
+        let keyDownEvent = fromEvent(input, 'keydown')
+            .subscribe(event => {
+                // console.log('KEYDOWN');
+
+                let inputId = field;
+                let isKeyDown = forms[this.props.id].fields[inputId].eventsTrigger.keyDownEvent;
+
+                if (isKeyDown) {
+                    return that.deactivateEvent(keyDownEvent);
+                }
+
+
+                forms[this.props.id].fields[inputId].dirty = true;
+
+                // unsubscribe it
+                that.deactivateEvent(keyDownEvent);
+                forms[this.props.id].fields[inputId].eventsTrigger.keyDownEvent = true;
+
+            });
+
+
+
+        let clickEvent = fromEvent(input, 'click')
+            .subscribe(event => {
+
+                // console.log('click');
+
+                let inputId = field;
+                let isClicked = forms[this.props.id].fields[inputId].eventsTrigger.clickEvent;
+
+                if (isClicked ||
+                    event.target.type === 'text' ||
+                    event.target.type === 'password') {
+                    return that.deactivateEvent(clickEvent);
+                }
+
+
+                forms[this.props.id].fields[inputId].dirty = true;
+
+                // unsubscribe it
+                that.deactivateEvent(clickEvent);
+                forms[this.props.id].fields[inputId].eventsTrigger.clickEvent = true;
+
+            });
+
+
+        /** 
+         * @description THIS WORK WILL BE DONE BY ONCHANGE EVENT PRESENT ON FIELD
+        */
+
+        // let keyEvent = fromEvent(input, 'keyup')
+        //     .subscribe(event => {
+        //         console.log('KEYUP');
+
+        //         let inputId = field;
+
+        //         // forms[that.props.id].fields[inputId].dirty = true;
+        //         forms[that.props.id].fields[inputId].value = event.target.value;
+        //         forms[that.props.id].value[inputId] = event.target.value;
+
+        //         that.updateField(inputId, event);
+        //         forms[this.props.id].fields[inputId].eventsTrigger.keyUpEvent = true;
+
+        //     });
     }
 
-    // for deactivation
-    deactivateFocusEvent(observable) {
+    // for deactivation    
+    deactivateEvent(observable) {
         observable.unsubscribe();
     }
 
     wrapEvents() {
 
-        let that = this;
         for (const field in forms[this.props.id].fields) {
 
-            var input = document.querySelector(`#${field}`);
+            var input = document.querySelector(`#${field}`); // by ID
 
-            let focusEvent = fromEvent(input, 'blur')
-                .subscribe(event => {
+            if (!input) {
 
-                    let inputId = field;
-                    let isFocused = forms[this.props.id].fields[inputId].eventsTrigger.focusEvent;
+                var sameNameInputs = document.querySelectorAll(`input[name=${field}]`);
 
-
-                    if (isFocused) {
-                        return that.deactivateFocusEvent(focusEvent);
+                for (let index = 0; index < sameNameInputs.length; index++) {
+                    if (sameNameInputs[index].form['id'] === this.props.id) {
+                        this.executeEvents(sameNameInputs[index], field);
                     }
-                    // console.log('FOCUS');
+                }
 
+                return;
+            }
 
-                    forms[this.props.id].fields[inputId].touched = true;
-                    that.updateField(inputId, event);
+            this.executeEvents(input, field);
 
-                    // unsubscribe it
-                    that.deactivateFocusEvent(focusEvent);
-                    forms[this.props.id].fields[inputId].eventsTrigger.focusEvent = true;
-                });
-
-            let keyDownEvent = fromEvent(input, 'keydown')
-                .subscribe(event => {
-
-                    let inputId = field;
-                    let isKeyDown = forms[this.props.id].fields[inputId].eventsTrigger.keyDownEvent;
-
-                    if (isKeyDown) {
-                        return that.deactivateKeyDownEvent(keyDownEvent);
-                    }
-
-                    // console.log('KEYDOWN');
-
-                    forms[this.props.id].fields[inputId].dirty = true;
-
-                    // unsubscribe it
-                    that.deactivateKeyDownEvent(keyDownEvent);
-                    forms[this.props.id].fields[inputId].eventsTrigger.keyDownEvent = true;
-
-                });
-
-            let keyEvent = fromEvent(input, 'keyup')
-                .subscribe(event => {
-                    // console.log('KEYUP');
-
-                    let inputId = field;
-
-                    forms[that.props.id].fields[inputId].dirty = true;
-                    forms[that.props.id].fields[inputId].value = event.target.value;
-                    forms[that.props.id].value[inputId] = event.target.value;
-
-                    that.updateField(inputId, event);
-                    forms[this.props.id].fields[inputId].eventsTrigger.keyUpEvent = true;
-
-                });
         }
 
     }
 
     render() {
         return (
-            <div>
-                {this.props.children}
-            </div>
+            <form {...this.props}></form>
         );
     }
 }
