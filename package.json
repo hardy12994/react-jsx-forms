@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "This Module helps you to deal with the Forms in **ReactJS**. It gives you very flexible form which will update you state of your Form every time you interact with it and this will save three main actions ( Touched, Dirty, Valid ) of every field form that you can get help in Validation area.",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hardy12994/react-jsx-forms.git"
@@ -29,7 +26,7 @@
     "reactValidation",
     "react-validations"
   ],
-  "author": "hardeepsingh12994@gmail.com",
+  "author": "Hardeep Singh <hardeepsingh12994@gmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/hardy12994/react-jsx-forms/issues"
