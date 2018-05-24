@@ -12,6 +12,12 @@ This Module helps you to deal with the Forms in **ReactJS**. It gives you very f
 -  The Cool Thing is, this module uses **`rxjs`** which helps to decide when to do what.
 
 
+## Installation - 
+
+```sh
+       npm install --save react-jsx-forms
+```
+
 ## How to use ?
 
 First you will initialize you form with `FormBuilder`. `FormBuilder` will accept the Form Schema. This will provide your form with extra powers. These Powers will be provided to your Form and Form Fields. Let's Jump to Code Directly -
@@ -102,21 +108,35 @@ You can See Above Validations ( All resturns Boolean ) are Also Set in the Form 
 
 Some of the validations are InBuilt like -
 
-- Validators.required()  **Returns true when field is Empty.**
+- **Validators.required()**
+  
+       Returns true when field is Empty.
 
-- Validators.minChar(10)  **Returns true when field value length is less that limit 10.**
+- **Validators.minChar(10)**
 
-- Validators.maxChar(10)  **Returns true when field exceeds the limit 10.**
+       Returns true when field value length is less that limit 10.
 
-- Validators.pattern(/hello/g)  **Returns true when Pattern is Not Matched.**
+- **Validators.maxChar(10)**
+       
+       Returns true when field exceeds the limit 10.
 
-- Validators.matchLength(10)  **Returns true when field length is not Matched.**
+- **Validators.pattern(/hello/g)**  
 
-- Validators.matchStringText(Hello)  **Returns true when field value(string) is not equal to "Hello".** 
+       Returns true when Pattern is Not Matched.
 
-- Validators.matchNumText(10000)  **Returns true when field value(string) is not equal to `10000`.**
+- **Validators.matchLength(10)**  
+       
+       Returns true when field length is not Matched.
 
-You can also Compose your OWN VALIDATION with `Validators.compose()`.
+- **Validators.matchStringText(Hello)**  
+       
+       Returns true when field value(string) is not equal to "Hello".
+
+- **Validators.matchNumText(10000)**  
+       
+       Returns true when field value(string) is not equal to `10000`.
+
+You can also Compose your OWN VALIDATION with **`Validators.compose()`**.
 
 Compose function will accepts an `Object` and return `Boolean`.
 
@@ -138,9 +158,9 @@ let notI = {
     }
 };
 
-// You can set as -(in Validators Array)
+// You can set as - (in Validators Array)
 
-`Validators.compose(notI)`
+**`Validators.compose(notI)`**
 
 ```
 
