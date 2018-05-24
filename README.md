@@ -201,48 +201,48 @@ let notI = {
 
 
 - **setErrors(errors)**
-
-    Expects errors = { key : value }, value will be boolean and updates validity on errors of form and field as well.
+       
+       Expects errors = { key : value }, value will be boolean and updates validity on errors of form and field as well.
 
 - **setValue(value, emitValue = false)**
-
-    value = "value", value will be any String, emitEvent = false, Boolean, Default is false, To Emit (field valueChanges) set emitEvent to true.
+       
+       value = "value", value will be any String, emitEvent = false, Boolean, Default is false, To Emit (field valueChanges)        set emitEvent to true.
 
 - **getValue()**
 
-    Returns the latest updated value.
+       Returns the latest updated value.
 
 - **setValidators(validators)**
 
-    Argument (validators= [Validators.required(), Validators.matchLength(10)] || null) validators can be updated.
+       Argument (validators= [Validators.required(), Validators.matchLength(10)] || null) validators can be updated.
 
 - **hasError(errorCode = null)**
 
-    Argument errorCode="required" || null, returns Boolean ,check if this `required` key is present and is true in Erorrs or if errorCode is null then it will tell true error validations are present in field or Not.
+       Argument errorCode="required" || null, returns Boolean ,check if this `required` key is present and is true in Erorrs        or if errorCode is null then it will tell true error validations are present in field or Not.
 
 - **makeDirty(isDirty = true)**
 
-    Argument isDirty = true, makes the field dirty mannual, Default true, it can also make undirty by passing false in it.
+       Argument isDirty = true, makes the field dirty mannual, Default true, it can also make undirty by passing false in          it.
 
 - **makeTouched(isTouched = true)**
 
-    Argument isTouched = true, makes the field Touched mannual, Default true, it can also make unTouched by passing false in it.
+        Argument isTouched = true, makes the field Touched mannual, Default true, it can also make unTouched by passing             false in it.
 
 - **getFieldData()**
 
-    Returns it returns latest field updated in properties
+       Returns it returns latest field updated in properties
 
 - **updateValueAndValidity(properties)**
 
-    Argument properties= { onlySelf : boolean , emitEvent : boolean }, Default - onlySelf = false ,emitEvent = false
+       Argument properties= { onlySelf : boolean , emitEvent : boolean }, Default - onlySelf = false ,emitEvent = false
     
-    What this will do ?
-    
-    1. Update value in one step up in form (value),
-    2. Validate when value is update.
-    3. Update Field Validity.
-    4. Update Value According to **onlySelf**.
-    5. Emit values to ValueChanges(of Form and Field) to the form according to **emitEvent**
+           What this will do ?
+
+           1. Update value in one step up in form (value),
+           2. Validate when value is update.
+           3. Update Field Validity.
+           4. Update Value According to **onlySelf**.
+           5. Emit values to ValueChanges(of Form and Field) to the form according to **emitEvent**
 
 
 
