@@ -1,11 +1,14 @@
 {
   "name": "react-jsx-forms",
-  "version": "1.0.0",
-  "description": "This Module helps you to deal with the Forms in **ReactJS**. It gives you very flexible form which will update you state of your Form every time you interact with it and this will save three main actions ( Touched, Dirty, Valid ) of every field form that you can get help in Validation area.",
-  "main": "index.js",
+  "version": "0.0.9",
+  "description": "This Module helps you to deal with the Forms in ReactJS. It gives you very flexible form which will update you state of your Form every time you interact with it and this will save three main actions ( Touched, Dirty, Valid ) of every field form that you can get help in Validation area.",
+  "main": "build.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hardy12994/react-jsx-forms.git"
+  },
+  "scripts": {
+    "start": "webpack-dev-server"
   },
   "keywords": [
     "reactjs",
@@ -26,7 +29,10 @@
     "reactValidation",
     "react-validations"
   ],
-  "author": "Hardeep Singh <hardeepsingh12994@gmail.com>",
+  "author": {
+    "name": "Hardeep Singh",
+    "email": "hardeepsingh12994@gmail.com"
+  },
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/hardy12994/react-jsx-forms/issues"
@@ -34,7 +40,18 @@
   "homepage": "https://github.com/hardy12994/react-jsx-forms#readme",
   "dependencies": {
     "react": "^16.3.2",
-    "rxjs": "^6.1.0",
+    "rxjs": "^6.2.0",
     "underscore": "^1.9.0"
+  },
+  "devDependencies": {
+    "webpack": "^4.9.1",
+    "webpack-cli": "^2.1.4",
+    "webpack-dev-server": "^3.1.4",
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-env": "^1.5.1"
   }
 }

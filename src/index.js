@@ -1,4 +1,4 @@
 
-export * from './forms';
-export * from './form-builder';
-export * from './validators';
+export { Forms } from './forms';
+export { FormBuilder } from './form-builder';
+export { Validators } from './validators';

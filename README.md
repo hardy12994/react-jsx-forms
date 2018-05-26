@@ -1,6 +1,14 @@
 This Module helps you to deal with the Forms in **ReactJS**. It gives you very flexible form which will update you state of your Form every time you interact with it and this will save three main actions **( Touched, Dirty, Valid )** of every field form that you can get help in Validation area.
 
-**This module will look familiar to those who had done *Angular* (A) Forms.**
+
+**This module will look familiar to those who had done *Angular* Forms 😃.**
+
+**Look in GIF -**
+
+
+![FormWithPowers](http://res.cloudinary.com/dkws91cqo/image/upload/v1527152960/Webp.net-gifmaker_2_jslufj.gif) 
+
+
 
 ## What it Provides ?
 
@@ -83,7 +91,7 @@ export class LoginComponent extends Component {
        render(){
 
            // you can see here your form is more than your defined.
-           // See the GIF bellow
+           // See the GIF above.
            console.log(this.state.loginForm);
 
            return (
@@ -95,11 +103,6 @@ export class LoginComponent extends Component {
        }
 }
 ```
-
-### Form with Powers -
-
-![FormWithPowers](http://res.cloudinary.com/dkws91cqo/image/upload/v1527152960/Webp.net-gifmaker_2_jslufj.gif) 
-
 
 
 ## Validations
