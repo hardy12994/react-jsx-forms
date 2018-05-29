@@ -1,14 +1,15 @@
 {
   "name": "react-jsx-forms",
-  "version": "0.0.9",
+  "version": "0.0.92",
   "description": "This Module helps you to deal with the Forms in ReactJS. It gives you very flexible form which will update you state of your Form every time you interact with it and this will save three main actions ( Touched, Dirty, Valid ) of every field form that you can get help in Validation area.",
-  "main": "build.js",
+  "main": "build/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hardy12994/react-jsx-forms.git"
   },
   "scripts": {
-    "start": "webpack-dev-server"
+    "start": "webpack --watch",
+    "build": "webpack"
   },
   "keywords": [
     "reactjs",
