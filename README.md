@@ -1,6 +1,14 @@
 This Module helps you to deal with the Forms in **ReactJS**. It gives you very flexible form which will update you state of your Form every time you interact with it and this will save three main actions **( Touched, Dirty, Valid )** of every field form that you can get help in Validation area.
 
-**This module will look familiar to those who had done *Angular* (A) Forms.**
+
+**This module will look familiar to those who had done *Angular* Forms 😃.**
+
+**Look in GIF -**
+
+
+![FormWithPowers](http://res.cloudinary.com/dkws91cqo/image/upload/v1527152960/Webp.net-gifmaker_2_jslufj.gif) 
+
+
 
 ## What it Provides ?
 
@@ -10,6 +18,17 @@ This Module helps you to deal with the Forms in **ReactJS**. It gives you very f
 -  Add Properties like `touched`, `dirty`, `error`, `valid`, `valueChanges` to each field in     form.
 -  And Yeah !! It makes sure your form is VALID or NOT.
 -  The Cool Thing is, this module uses **`rxjs`** which helps to decide when to do what.
+
+## DEMO -
+
+*Check In Console while Editing Form*
+
+**[Simple Form UI and Code in codesandbox]**
+
+**https://codesandbox.io/embed/zqp221148x?view=preview**
+
+[Simple Form UI and Code in codesandbox]:<https://codesandbox.io/embed/zqp221148x?view=preview>
+
 
 
 ## Installation - 
@@ -83,7 +102,7 @@ export class LoginComponent extends Component {
        render(){
 
            // you can see here your form is more than your defined.
-           // See the GIF bellow
+           // See the GIF above.
            console.log(this.state.loginForm);
 
            return (
@@ -95,11 +114,6 @@ export class LoginComponent extends Component {
        }
 }
 ```
-
-### Form with Powers -
-
-![FormWithPowers](http://res.cloudinary.com/dkws91cqo/image/upload/v1527152960/Webp.net-gifmaker_2_jslufj.gif) 
-
 
 
 ## Validations

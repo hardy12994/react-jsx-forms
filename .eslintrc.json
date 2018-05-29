@@ -16,8 +16,8 @@
         "react"
     ],
     "rules": {
-        "no-unused-vars":"off",
-        "no-console":"off",
+        "no-unused-vars": "off",
+        "no-console": "off",
         "linebreak-style": [
             "error",
             "unix"
@@ -30,5 +30,11 @@
             "error",
             "always"
         ]
+    },
+    "globals": {
+        "require": true,
+        "process": true,
+        "module": true,
+        "__dirname": true
     }
 }
