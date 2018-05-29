@@ -21,11 +21,13 @@ This Module helps you to deal with the Forms in **ReactJS**. It gives you very f
 
 ## DEMO -
 
-**[Simple Form UI and Code in codesandbox]**
-
 *Check In Console while Editing Form*
 
-[Simple Form UI and Code in codesandbox]:(https://codesandbox.io/embed/zqp221148x?view=preview)
+**[Simple Form UI and Code in codesandbox]**
+
+**https://codesandbox.io/embed/zqp221148x?view=preview**
+
+[Simple Form UI and Code in codesandbox]:<https://codesandbox.io/embed/zqp221148x?view=preview>
 
 
 
