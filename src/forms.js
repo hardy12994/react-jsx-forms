@@ -241,7 +241,7 @@ export class Forms extends Component {
                     }
                 }
 
-                return;
+                continue;
             }
 
             this.executeEvents(input, field);

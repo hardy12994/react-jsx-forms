@@ -177,6 +177,13 @@ export class FieldProperties {
 
     updateValueAndValidity(properties) {
 
+        if (!properties && _.isEmpty(properties)) {
+            properties = {
+                onlySelf: false,
+                emitEvent: false
+            };
+        }
+
         let formData = forms[this.formId];
 
         let formFields = formData.fields;
@@ -191,7 +198,7 @@ export class FieldProperties {
 
         FormBuilder.updateFormValidity(this.formId);
 
-        if (_.isEmpty(properties)) return;
+        // if (_.isEmpty(properties)) return;
 
         if (!properties.onlySelf) {
             forms[this.formId].value[this.id] = this.value;
