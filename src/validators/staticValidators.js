@@ -71,7 +71,9 @@ export class StaticValidators {
     }
 
 
-
+    /** 
+     * returns true when your input value string not matched provided value
+    */
     static matchStringTextValidator(data, event) {
 
         checkRef(event);
@@ -84,7 +86,9 @@ export class StaticValidators {
         return false;
     }
 
-
+    /** 
+     * not define in doc YET
+    */
     static matchNumTextValidator(data, event) {
 
         checkRef(event);
@@ -97,6 +101,11 @@ export class StaticValidators {
         return false;
     }
 
+    /**
+     * 
+     * returns true when your input value length not 
+     * matched provided value lenght.
+     */
     static matchLengthValidator(data, event) {
 
         checkRef(event);
@@ -109,13 +118,21 @@ export class StaticValidators {
         return false;
     }
 
+
+    /** 
+     * returns true when your inp value length is more than provided value lenght
+     * Eg - provided length = 3,
+     * value = ronak, false 
+     * value = ron, true 
+     * value = ro, true 
+    */
     static maxCharValidator(data, event) {
 
         checkRef(event);
         if (!event.target) return;
         let charLength = data;
         let value = event.target.value;
-        if (value && value.length > Number(charLength)) {
+        if (value && value.length >= Number(charLength)) {
             return true;
         }
         return false;
@@ -123,6 +140,14 @@ export class StaticValidators {
     }
 
 
+
+    /** 
+     * returns true when your inp value length is less than provided value lenght
+     * Eg - provided length = 3,
+     * value = ronak, false 
+     * value = ron, true 
+     * value = ro, true 
+    */
     static minCharValidator(data, event) {
 
         checkRef(event);
@@ -130,7 +155,7 @@ export class StaticValidators {
 
         let charLength = data;
         let value = event.target.value;
-        if (value && value.length < Number(charLength)) {
+        if (value && value.length <= Number(charLength)) {
             return true;
         }
         return false;

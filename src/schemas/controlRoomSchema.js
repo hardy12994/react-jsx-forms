@@ -1,12 +1,20 @@
 import { Subject } from 'rxjs';
 import _ from 'underscore';
-import { forms } from './forms';
-import { FormBuilder } from './form-builder';
+import { forms } from '../core-data/formData';
+import {
+    updateFieldValueUptoTop
+} from '../updations/field-updations';
+import {
+} from '../updations/form-updations';
+import {
+    updateField
+} from '../updations/event-updations';
 
-export class FieldProperties {
+
+export class ControlRoom {
 
     constructor(id, formId, value = '', validations = [], error = {},
-        touched = false, dirty = false, valid = true) {
+        touched = false, dirty = false, valid = true, father = null) {
         this.id = id;
         this.formId = formId;
         this.value = value;
@@ -16,16 +24,10 @@ export class FieldProperties {
         this.touched = touched;
         this.dirty = dirty;
         this.valueChanges = new Subject();
-
-        this.eventsTrigger = {
-            focusEvent: false,
-            keyDownEvent: false,
-            // keyUpEvent: false,
-            clickEvent: false
-        };
-
-        // this.setErrorsForNoInputValidations();
+        this.father = father;
+        this.events = {};
     }
+
 
     /** 
      * @argument errors = { key : value }, value will be boolean 
@@ -66,11 +68,31 @@ export class FieldProperties {
 
     setValue(value, emitValue = false) {
 
-        this.value = value;
+        this.value = value.toString();
         if (emitValue === true) {
             this.valueChanges.next(value);
         }
     }
+
+    // /** 
+    //  * @argument value = {}, value will be any Object,
+    //  * set the value if it is present in the parameter object
+    //  * emitEvent = false, Boolean, Default is false,
+    //  * To Emit (field valueChanges) set emitEvent to true.  
+    // */
+
+    // patchValue(value, emitValue = false) {
+
+    //     for (const key in value) {
+    //         if (this.value[key] !== undefined) {
+    //             this.value[key] = value[key].toString();
+    //         }
+    //     }
+
+    //     if (emitValue === true) {
+    //         this.valueChanges.next(value);
+    //     }
+    // }
 
     /** 
      * @returns the latest updated value.
@@ -123,7 +145,7 @@ export class FieldProperties {
 
     makeDirty(isDirty = true) {
         this.dirty = isDirty;
-        this.eventsTrigger.keyDownEvent = isDirty;
+        forms[this.formId].valueChanges.next(forms);
         return;
     }
 
@@ -135,7 +157,7 @@ export class FieldProperties {
 
     makeTouched(isTouched = true) {
         this.touched = isTouched;
-        this.eventsTrigger.focusEvent = isTouched;
+        forms[this.formId].valueChanges.next(forms);
         return;
     }
 
@@ -184,24 +206,21 @@ export class FieldProperties {
             };
         }
 
-        let formData = forms[this.formId];
+        /**
+         * this.value may be string , group ,array
+         */
 
-        let formFields = formData.fields;
-
-        FormBuilder.updateFieldValidations(formFields[this.id], {
+        updateField(this.formId, this, {
             target: {
                 value: this.value
             }
-        });
-
-        FormBuilder.updateFieldValidity(formFields[this.id]);
-
-        FormBuilder.updateFormValidity(this.formId);
+        }, false);
 
         // if (_.isEmpty(properties)) return;
 
         if (!properties.onlySelf) {
-            forms[this.formId].value[this.id] = this.value;
+            // forms[this.formId].value[this.id] = this.value;
+            updateFieldValueUptoTop(this, this.value);
         }
 
         if (properties.emitEvent) {
@@ -212,18 +231,4 @@ export class FieldProperties {
 
         }
     }
-
-    // setErrorsForNoInputValidations() {
-
-    //     this.validations.forEach(validation => {
-
-    //         if (validation.name === 'required') {
-    //             this.error = {
-    //                 required: true
-    //             };
-    //         }
-    //         return;
-    //     });
-    // }
-
 }
