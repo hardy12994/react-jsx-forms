@@ -1,1 +1,8 @@
-export * from './src';
+export {
+    FormArray,
+    Forms,
+    FormBuilder,
+    FormField,
+    FormGroup, 
+    Validators
+} from './src';
