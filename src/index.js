@@ -1,4 +1,10 @@
 
-export { Forms } from './forms';
-export { FormBuilder } from './form-builder';
+export {
+    Forms, 
+    FormBuilder,
+    FormGroup, 
+    FormArray, 
+    FormField
+} from './formTypes';
+
 export { Validators } from './validators';
