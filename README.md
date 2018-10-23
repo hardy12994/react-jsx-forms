@@ -1,5 +1,6 @@
 This Module helps you to deal with the Forms in **ReactJS**. It gives you very flexible form which will update you state of your Form every time you interact with it and this will save three main actions **( Touched, Dirty, Valid )** of every field form that you can get help in Validation area.
 
+**http://react-jsx-forms.co.in**
 
 **This module will look familiar to those who had done *Angular* Forms 😃.**
 
@@ -7,7 +8,6 @@ This Module helps you to deal with the Forms in **ReactJS**. It gives you very f
 
 
 ![FormWithPowers](http://res.cloudinary.com/dkws91cqo/image/upload/v1527152960/Webp.net-gifmaker_2_jslufj.gif) 
-
 
 
 ## What it Provides ?
@@ -19,17 +19,20 @@ This Module helps you to deal with the Forms in **ReactJS**. It gives you very f
 -  And Yeah !! It makes sure your form is VALID or NOT.
 -  The Cool Thing is, this module uses **`rxjs`** which helps to decide when to do what.
 
-## DEMO -
+## DEMO's -
 
-*Check In Console while Editing Form*
+### **[FORM BUILDER DEMO]**
 
-**[Simple Form UI and Code in codesandbox]**
+### **[FORM GROUP DEMO]**
 
-**https://codesandbox.io/embed/zqp221148x?view=preview**
-
-[Simple Form UI and Code in codesandbox]:<https://codesandbox.io/embed/zqp221148x?view=preview>
+### **[FORM ARRAY DEMO]**
 
 
+[FORM BUILDER DEMO]:<http://react-jsx-forms.co.in/form-builder/example>
+
+[FORM GROUP DEMO]:<http://react-jsx-forms.co.in/form-groups/example>
+
+[FORM ARRAY DEMO]:<http://react-jsx-forms.co.in/form-array/example>
 
 ## Installation - 
 
@@ -39,86 +42,50 @@ This Module helps you to deal with the Forms in **ReactJS**. It gives you very f
 
 ## How to use ?
 
-First you will initialize you form with `FormBuilder`. `FormBuilder` will accept the Form Schema. This will provide your form with extra powers. These Powers will be provided to your Form and Form Fields. Let's Jump to Code Directly -
+First you will initialize you form with [FormBuilder]. [FormBuilder] will accept the Form Schema. 
 
-```sh
-import { Forms, FormBuilder, Validators } from 'react-jsx-forms';
-import React, { Component } from 'react';
+This will provide your form with extra powers like `dirty`, `touched`,`valid`,`observable` etc. These Powers will present in Form and it's Form Fields.
 
-export class LoginComponent extends Component {
+[FormBuilder]:<http://react-jsx-forms.co.in/form-builder>
 
-       constructor(props) {
+**[Go to live examples, code and docs!]**
 
-        super(props);
-        this.formInit();
-        this.state = {
-            loginForm: { ...this.loginForm }
-        };
+[Go to live examples, code and docs!]:<http://react-jsx-forms.co.in>
 
-        // Discribe Below        
-        this.handelChangeEvent = this.handelChangeEvent.bind(this);
-       }
+### This also provides -
 
-       formInit() {
+#### [Form Group] 
 
-        // this is your form Schema
-        var fields = {
-            
-            // input type text with id phone
-            phone: {
-                value: '',
-                validations: [Validators.required(), Validators.matchLength(10)]
-            },
+Grouping multiple forms in hierarchy with [Form Group]. 
 
-            // input type password with id password            
-            password: {
-                value: '',
-                validations: [Validators.required(), Validators.compose(notI)]
-            },
+Check [form group inbuilt functions] and [form group demo].
 
-            // input type checkbox with id save_password      
-            save_password: {
-                value: true
-            },
+[form group inbuilt functions]:<http://react-jsx-forms.co.in/form-groups/methods>
 
-            // input type radio with id gender                        
-            gender: {
-                value: 'female',
-                validations: [Validators.required()]
-            }
-        };
+[form group demo]:<http://react-jsx-forms.co.in/form-groups/example>
 
-        // `loginForm`, first parameter or your FormBuilder is your FormId.
-        // `FormBuilder`, helps you to build your form.
 
-        this.loginForm = new FormBuilder('loginForm', fields);
-    }
+#### [Form Array] 
 
-        componentDidMount() {
-        // Discribe Below     
-        this.activateSubscribers();
-    } 
+If we want to handle list in form, then we will use [Form Array]. 
 
-       render(){
+Check [form array inbuilt functions] and [form array demo].
 
-           // you can see here your form is more than your defined.
-           // See the GIF above.
-           console.log(this.state.loginForm);
+[form array inbuilt functions]:<http://react-jsx-forms.co.in/form-array/methods>
 
-           return (
-               <MyForm 
-                    formFields = {this.state.loginForm.fields} 
-                    onChange = { this.handelChangeEvent }
-                    />
-           );
-       }
-}
-```
+[form array demo]:<http://react-jsx-forms.co.in/form-array/example>
+ 
+
+[Form Group]:<http://react-jsx-forms.co.in/form-groups>
+
+[Form Array]:<http://react-jsx-forms.co.in/form-array>
 
 
 ## Validations
 
-You can See Above Validations ( All resturns Boolean ) are Also Set in the Form Schema.
+All [validations] are set in the Form Schema and all them returns boolean. If it is `true` then your field contain errors otherwise your field is valid.
+
+[validations]:<http://react-jsx-forms.co.in/validations>
 
 Some of the validations are InBuilt like -
 
@@ -150,249 +117,16 @@ Some of the validations are InBuilt like -
        
        Returns true when field value(string) is not equal to `10000`.
 
-You can also Compose your OWN VALIDATION with **`Validators.compose()`**.
 
-Compose function will accepts an `Object` and return `Boolean`.
 
-Let's Define `notI` object which is used above -
+You can also **[Compose]** your OWN VALIDATION with **`Validators.compose()`**.
 
-```sh
+[Compose]:<http://react-jsx-forms.co.in/validations>
 
-let notI = {
-    name: 'notI',
-    action: function (event) { 
-        
-        // event you get from which you have define this Validation as in password
 
-        let value = event.target.value;
-        if (value.includes('i')) {
-            return true;
-        }
-        return false;
-    }
-};
+**NOTE** - *[Read the rules] which can help you make your forms.*
 
-// You can set as - (in Validators Array)
-
-**`Validators.compose(notI)`**
-
-```
-
-
-## What form Gives ?
-
-#### What this form provide us, Let See -
-
-```sh
-
- fields : {
-     phone : {
-         dirty : false ,
-         touched : false ,
-         error : { 
-             // Depends on Validations
-         },
-         formId : "loginForm",
-         id : "phone",
-         touched : false ,
-         value : "",
-         valid : true , //false if any validation fail
-         validations : [], // which you set in state
-         valueChanges : Subject() // // rxjs Subject - subscribe it to get the form when PHONE value changes 
-     }
- }
- id : "loginForm",
- value : { 
-     phone : ""
- }
- valid : false ,
- valueChanges : Subject() // rxjs Subject - subscribe it to get the form when any value changes
-
-```
-
-#### Check the Fuctions presenet in every Field have own motive -
-
-
-
-- **setErrors(errors)**
-       
-       Expects errors = { key : value }, value will be boolean and updates validity on errors of form and field as well.
-
-- **setValue(value, emitValue = false)**
-       
-       value = "value", value will be any String, emitEvent = false, Boolean, Default is false, To Emit (field valueChanges) set emitEvent to true.
-
-- **getValue()**
-
-       Returns the latest updated value.
-
-- **setValidators(validators)**
-
-       Argument (validators= [Validators.required(), Validators.matchLength(10)] || null) validators can be updated.
-
-- **hasError(errorCode = null)**
-
-       Argument errorCode="required" || null, returns Boolean ,check if this `required` key is present and is true in Erorrs or if errorCode is null then it will tell true error validations are present in field or Not.
-
-- **makeDirty(isDirty = true)**
-
-       Argument isDirty = true, makes the field dirty mannual, Default true, it can also make undirty by passing false in it.
-
-- **makeTouched(isTouched = true)**
-
-        Argument isTouched = true, makes the field Touched mannual, Default true, it can also make unTouched by passing false in it.
-
-- **getFieldData()**
-
-       Returns it returns latest field updated in properties
-
-- **updateValueAndValidity(properties)**
-
-       Argument properties= { onlySelf : boolean , emitEvent : boolean }, Default - onlySelf = false ,emitEvent = false
-    
-           What this will do ?
-
-           1. Update value in one step up in form (value),
-           2. Validate when value is update.
-           3. Update Field Validity.
-           4. Update Value According to **onlySelf**.
-           5. Emit values to ValueChanges(of Form and Field) to the form according to **emitEvent**
-
-
-
-
-## How to USE ?
-
-
-Now lets open the Expand the `Forms` tag and define our `JSX Form` with `Validations` in it -
-
-```sh
-
-let MyForm = props => {
-
-    return (
-        <Forms id="loginForm">
-
-            <h3> TEXT INPUTS </h3>
-
-            <input  placeholder="Mobile Number"
-                onChange={props.handelChangeEvent}
-                type="text" name="phone" id="phone"
-                value={props.formFields.phone.value}
-            />
-            {props.formFields.phone.error &&
-                (props.formFields.phone.touched && props.formFields.phone.error.required)
-                ? <span className="error">Phone Number is Required</span>
-                : <span></span>
-            }
-            {props.formFields.phone.error &&
-                (props.formFields.phone.touched && props.formFields.phone.error.matchLength)
-                ? <span className="error">Invalid Mobile Number.</span>
-                : <span></span>
-            }
-            <input  placeholder="Password"
-                onChange={props.handelChangeEvent}
-                type="password" name="password" id="password"
-                value={props.formFields.password.value}
-            />
-            {props.formFields.password.error &&
-                (props.formFields.password.touched && props.formFields.password.error.required)
-                ? <span className="error">Password is Required</span>
-                : <span></span>
-            }
-            {props.formFields.password.error &&
-                (props.formFields.password.touched && props.formFields.password.error.notI)
-                ? <span className="error">Please Remove i/I from Password</span>
-                : <span></span>
-            }
-
-            <h3> CHECKBOX INPUTS </h3>
-
-            <div>
-                <label className="sp" >Save Password : </label>
-                <input type="checkbox" name="save_password" id="save_password"
-                    checked={props.formFields.save_password.value}
-                    onChange={props.handelChangeEvent}
-                />
-            </div>
-
-            <h3> RADIO INPUTS </h3>
-
-            <div>
-                <label className="sp" >Gender : </label>
-                <input type="radio" name="gender" value="male" id="male"
-                    onChange={props.handelChangeEvent}
-                    checked={props.formFields.gender.value === 'male'} />
-                <span>Male</span><br />
-                <input type="radio" name="gender" value="female" id="female"
-                    onChange={props.handelChangeEvent}
-                    checked={props.formFields.gender.value === 'female'} />
-                <span>Female</span><br />
-                <input type="radio" name="gender" value="other" id="other"
-                    onChange={props.handelChangeEvent}
-                    checked={props.formFields.gender.value === 'other'} />
-                <span>Other</span>
-            </div>
-    </Forms>
-    );
-}
-```
-
-### How I Play with **onChange** -
-
-As you know onChange field is required to make Updation in State so 
-
-that we can see the updation in View. So Let's define it quickly -
-
-
-```sh
-
-
-
-    // call this.activateSubscribers() in `constructor` OR `componentDidMount`
-
-    activateSubscribers() {
-
-        this.loginForm
-            .valueChanges
-            .subscribe(form => {
-
-                this.setState({
-                    ...this.state,
-                    loginForm: form.loginForm
-                });
-
-            });
-    }
-
-    handelChangeEvent(event) {
-
-        let newValue;
-        let targetId;
-
-        if (event.target.type === 'text' || event.target.type === 'password') {
-            newValue = event.target.value;
-            targetId = event.target.id;
-        }
-        if (event.target.type === 'checkbox') {
-            newValue = event.target.checked;
-            targetId = event.target.id;
-        }
-
-        if (event.target.type === 'radio') {
-            targetId = event.target.name;
-            newValue = event.target.value;
-        }
-
-        this.loginForm.fields[targetId].setValue(newValue);
-        this.loginForm.fields[targetId].updateValueAndValidity({ emitEvent: true });
-
-    }
-
-```
-
-
-**NOTE** - *Call updateValueAndValidity function after setValue if you want to Check the particular field is valid or not and also you can send the properties as onlySelf,emitEvent in object. By default they are false. If onlySelf is true, then value inside the main form is not set. If emitEvent is true, then your valueChanges will be call if you have subscribe that observable ( of Form and particular Field )*
+[Read the rules]:<http://react-jsx-forms.co.in/rules-used>
 
 
 **Contribution are Wellcome !**
