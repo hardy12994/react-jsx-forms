@@ -2,7 +2,7 @@
 
 This Module helps you to deal with the Forms in **ReactJS**. It gives you very flexible form which will update you state of your Form every time you interact with it and this will save three main actions **( Touched, Dirty, Valid )** of every field form that you can get help in Validation area.
 
-*Website for **RJF** -* **http://react-jsx-forms.co.in**
+*Website for **RJF** -* **https://hardy12994.github.io/react-jsx-forms.bin/**
 
 **This module will look familiar to those who had done *Angular* Forms 😃.**
 
